@@ -33,6 +33,13 @@ pieds sur les chaises, bavardages, chewing-gums, téléphone…
 L'APK est produit dans `app/build/outputs/apk/debug/app-debug.apk`.
 Sous Windows, utilisez `gradlew.bat assembleDebug`.
 
+### Compilation automatique sur GitHub
+
+À chaque envoi de code, la GitHub Action `.github/workflows/build-apk.yml` compile l'APK.
+Pour le récupérer sans rien installer : onglet **Actions** du dépôt, choisissez la dernière exécution
+réussie, puis téléchargez l'artefact **PVLycee-debug-apk** (un fichier zip contenant
+`app-debug.apk`). Le bouton **Run workflow** relance une compilation à la demande.
+
 ### Tests
 
 ```bash
