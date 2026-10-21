@@ -134,6 +134,32 @@ class TicketRenderer(context: Context) {
         pen.space(90f)
     }
 
+    /**
+     * Ticket photo : [photo] est déjà en noir et blanc pur, à la largeur du papier.
+     * Avec [evidence], il est encadré façon « pièce à conviction ».
+     */
+    fun renderPhoto(photo: Bitmap, widthDots: Int, caption: String, evidence: Boolean, date: String, school: String): Bitmap =
+        draw(widthDots) { pen ->
+            if (evidence) {
+                pen.blackBand("PIÈCE À CONVICTION", 34f * pen.scale)
+                pen.space(4f)
+                pen.text("POLICE DE LA CLASSE · SERVICE DE L'IDENTITÉ SCOLAIRE", monoBold, 14f, Layout.Alignment.ALIGN_CENTER)
+                pen.space(6f)
+            }
+            pen.image(photo)
+            if (caption.isNotBlank()) {
+                pen.space(6f)
+                pen.text(caption, titleFont, 24f, Layout.Alignment.ALIGN_CENTER)
+            }
+            if (evidence) {
+                pen.space(4f)
+                pen.text(listOf(school, date).filter { it.isNotBlank() }.joinToString(", "), monoFont, 15f, Layout.Alignment.ALIGN_CENTER)
+                pen.dashed()
+                pen.text("Document humoristique sans valeur légale.", monoBold, 14f, Layout.Alignment.ALIGN_CENTER)
+            }
+            pen.space(90f)
+        }
+
     // --- Moteur de dessin ---
 
     private fun draw(widthDots: Int, block: (Pen) -> Unit): Bitmap {
@@ -224,6 +250,13 @@ class TicketRenderer(context: Context) {
             }
             canvas.drawLine(margin, y, width - margin, y, p)
             space(8f)
+        }
+
+        /** Image déjà à la largeur du papier, copiée point par point (aucun lissage). */
+        fun image(b: Bitmap) {
+            val left = ((width - b.width) / 2).toFloat()
+            canvas.drawBitmap(b, left, y, null)
+            y += b.height
         }
 
         fun solid(h: Float) {

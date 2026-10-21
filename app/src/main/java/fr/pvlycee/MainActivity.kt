@@ -34,6 +34,8 @@ import fr.pvlycee.ui.CatalogScreen
 import fr.pvlycee.ui.GagesScreen
 import fr.pvlycee.ui.HazardStripe
 import fr.pvlycee.ui.Oswald
+import fr.pvlycee.ui.PhotoScreen
+import fr.pvlycee.ui.PhotoViewModel
 import fr.pvlycee.ui.PrinterIndicator
 import fr.pvlycee.ui.PrinterScreen
 import fr.pvlycee.ui.PvColors
@@ -58,6 +60,7 @@ class MainActivity : ComponentActivity() {
 private object Routes {
     const val VERBALISER = "verbaliser"
     const val REGISTRE = "registre"
+    const val PHOTO = "photo"
     const val REGLAGES = "reglages"
     const val PRINTER = "imprimante"
     const val CATALOG = "catalogue"
@@ -67,6 +70,7 @@ private object Routes {
     fun title(route: String) = when {
         route == VERBALISER -> "PVLycée"
         route == REGISTRE -> "Registre"
+        route == PHOTO -> "Photo"
         route == REGLAGES -> "Réglages"
         route == PRINTER -> "Imprimante"
         route == CATALOG -> "Catalogue des infractions"
@@ -77,6 +81,7 @@ private object Routes {
 
     fun tabOf(route: String) = when {
         route == VERBALISER -> VERBALISER
+        route == PHOTO -> PHOTO
         route == REGISTRE || route.startsWith(STUDENT) -> REGISTRE
         else -> REGLAGES
     }
@@ -94,6 +99,7 @@ private fun PvAppUi() {
     val verbaliserVm: VerbaliserViewModel = viewModel()
     val registreVm: RegistreViewModel = viewModel()
     val settingsVm: SettingsViewModel = viewModel()
+    val photoVm: PhotoViewModel = viewModel()
     val status by verbaliserVm.printers.status.collectAsStateWithLifecycle()
 
     BackHandler(enabled = stack.size > 1) { pop() }
@@ -141,6 +147,10 @@ private fun PvAppUi() {
                     icon = { Icon(painterResource(R.drawable.ic_book), null) }, label = { Text("Registre") }, colors = colors,
                 )
                 NavigationBarItem(
+                    selected = current == Routes.PHOTO, onClick = { tab(Routes.PHOTO) },
+                    icon = { Icon(painterResource(R.drawable.ic_camera), null) }, label = { Text("Photo") }, colors = colors,
+                )
+                NavigationBarItem(
                     selected = current == Routes.REGLAGES, onClick = { tab(Routes.REGLAGES) },
                     icon = { Icon(painterResource(R.drawable.ic_settings), null) }, label = { Text("Réglages") }, colors = colors,
                 )
@@ -155,6 +165,7 @@ private fun PvAppUi() {
                     onOpenPrinter = { push(Routes.PRINTER) },
                     onOpenRegistre = { tab(Routes.REGISTRE) },
                 )
+                route == Routes.PHOTO -> PhotoScreen(photoVm, onOpenPrinter = { push(Routes.PRINTER) })
                 route == Routes.REGISTRE -> RegistreScreen(registreVm, onOpenStudent = { push(Routes.STUDENT + it) })
                 route.startsWith(Routes.STUDENT) -> StudentDetailScreen(
                     registreVm,

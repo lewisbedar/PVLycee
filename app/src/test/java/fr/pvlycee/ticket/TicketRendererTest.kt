@@ -76,6 +76,23 @@ class TicketRendererTest {
         save(b, "ticket-non-identifie")
     }
 
+    @Test fun `ticket photo tramé en noir et blanc pur`() {
+        val src = Bitmap.createBitmap(640, 480, Bitmap.Config.ARGB_8888)
+        val c = android.graphics.Canvas(src)
+        val p = android.graphics.Paint()
+        for (x in 0 until 640) { p.color = Color.rgb(x * 255 / 639, x * 255 / 639, x * 255 / 639); c.drawLine(x.toFloat(), 0f, x.toFloat(), 480f, p) }
+        p.color = Color.BLACK; c.drawCircle(320f, 240f, 120f, p)
+        val photo = fr.pvlycee.photo.PhotoProcessor.toPrintable(src, 384, fr.pvlycee.photo.PhotoSettings())
+        assertEquals(384, photo.width)
+        assertEquals(288, photo.height)
+        val b = renderer.renderPhoto(photo, 384, "Chewing-gum saisi", evidence = true, date = "21/10/2026", school = "Lycée")
+        assertEquals(384, b.width)
+        assertPureBlackAndWhite(b)
+        save(b, "ticket-photo")
+        val rotated = fr.pvlycee.photo.PhotoProcessor.toPrintable(src, 384, fr.pvlycee.photo.PhotoSettings(rotation = 90, dither = false))
+        assertEquals(512, rotated.height)
+    }
+
     @Test fun `mire de test`() {
         val b = renderer.renderTestPattern(384, "Imprimante de test")
         assertPureBlackAndWhite(b)

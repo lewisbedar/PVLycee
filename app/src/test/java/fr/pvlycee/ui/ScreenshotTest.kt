@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.lifecycle.ViewModelProvider
 import androidx.test.core.app.ApplicationProvider
 import fr.pvlycee.MainActivity
 import fr.pvlycee.PvApp
@@ -77,6 +78,22 @@ abstract class ScreenshotBase(private val prefix: String) {
         shot("4b-mastication")
         rule.onNodeWithText("Registre").performClick()
         shot("5-registre")
+        rule.onNodeWithText("Photo").performClick()
+        shot("5b-photo-autorisation")
+        rule.runOnUiThread {
+            val src = Bitmap.createBitmap(640, 480, Bitmap.Config.ARGB_8888)
+            val c = android.graphics.Canvas(src)
+            val p = android.graphics.Paint()
+            for (x in 0 until 640) { p.color = android.graphics.Color.rgb(x * 255 / 639, 200, 255 - x * 255 / 639); c.drawLine(x.toFloat(), 0f, x.toFloat(), 480f, p) }
+            p.color = android.graphics.Color.BLACK; c.drawCircle(320f, 240f, 110f, p)
+            ViewModelProvider(rule.activity)[PhotoViewModel::class.java].setSource(src)
+        }
+        rule.mainClock.advanceTimeBy(500)
+        rule.waitUntil(10_000) {
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(100))
+            ViewModelProvider(rule.activity)[PhotoViewModel::class.java].ticket.value != null
+        }
+        shot("5c-photo-reglages")
         rule.onNodeWithText("Réglages").performClick()
         shot("6-reglages")
         rule.onNodeWithText("Choisir").performClick()

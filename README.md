@@ -131,6 +131,20 @@ relance l'impression du même ticket. Sans imprimante (mode aperçu), le bouton 
 - **Amnistie** (Registre) : rend les 12 points à un élève ou à toute une classe. L'historique et la
   classe de contravention sont conservés.
 
+### Photographier et imprimer
+
+L'onglet **Photo** contient son propre appareil photo : pas besoin d'application Appareil photo
+(le Sunmi V2 n'en a pas).
+1. Au premier passage, autorisez l'appareil photo.
+2. Cadrez, puis touchez **PHOTOGRAPHIER**. Vous pouvez aussi **choisir une image enregistrée**.
+3. Réglez le rendu : **Photo (tramé)** pour une photo, **Texte, dessin** pour un document ou un
+   dessin au trait ; ajustez la luminosité et le contraste ; **Pivoter** si besoin.
+4. Le bandeau « Pièce à conviction » et la légende sont facultatifs. L'aperçu est le ticket imprimé.
+5. Touchez **IMPRIMER**.
+
+La photo n'est jamais enregistrée : elle reste en mémoire le temps de l'impression. Sur papier
+thermique, une photo sort souvent trop sombre : augmentez la luminosité si besoin.
+
 ### Sauvegarde
 
 *Registre > Sauvegarde > Exporter* crée un fichier JSON complet (élèves, PV, catalogue, réglages).
