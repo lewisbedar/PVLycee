@@ -22,7 +22,9 @@ import kotlin.math.roundToInt
  */
 class TicketRenderer(context: Context) {
     private val titleFont: Typeface = loadFont(context, R.font.oswald_bold, Typeface.DEFAULT_BOLD)
-    private val monoFont: Typeface = loadFont(context, R.font.jetbrains_mono_regular, Typeface.MONOSPACE)
+    // Corps du ticket en demi-gras : en graisse normale, les traits fins se perdent au passage
+    // en noir et blanc et le texte sort pâle et haché (constaté sur Sunmi V2).
+    private val monoFont: Typeface = loadFont(context, R.font.jetbrains_mono_semibold, Typeface.MONOSPACE)
     private val monoBold: Typeface = loadFont(context, R.font.jetbrains_mono_bold, Typeface.create(Typeface.MONOSPACE, Typeface.BOLD))
 
     /** Rendu du PV. */
@@ -94,7 +96,7 @@ class TicketRenderer(context: Context) {
         pen.space(6f)
         pen.text(
             "Contestation possible auprès du bureau des réclamations : la corbeille, au fond de la salle.",
-            monoFont, 14f,
+            monoFont, 15f,
         )
         pen.space(8f)
         pen.dashed()
@@ -115,20 +117,20 @@ class TicketRenderer(context: Context) {
         pen.space(4f)
         pen.ruler()
         pen.space(4f)
-        pen.text("Les deux traits verticaux doivent toucher les bords du papier.", monoFont, 14f)
+        pen.text("Les deux traits verticaux marquent les bords de la zone imprimable : ils doivent être visibles en entier.", monoFont, 15f)
         pen.space(10f)
         for (h in listOf(4, 8, 16, 32)) {
             pen.solid(h.toFloat())
             pen.space(6f)
         }
-        pen.text("Bandes noires : 4, 8, 16 et 32 points. Elles doivent être bien noires et régulières.", monoFont, 14f)
+        pen.text("Bandes noires : 4, 8, 16 et 32 points. Elles doivent être bien noires et régulières.", monoFont, 15f)
         pen.space(10f)
-        for (size in listOf(12f, 16f, 20f, 26f)) pen.text("Corps ${size.toInt()} : éèàçù 0123456789", monoFont, size)
+        for (size in listOf(14f, 16f, 20f, 26f)) pen.text("Corps ${size.toInt()} : éèàçù 0123456789", monoFont, size)
         for (size in listOf(22f, 32f, 44f)) pen.text("OSWALD ${size.toInt()}", titleFont, size)
         pen.space(6f)
         pen.checker()
         pen.space(6f)
-        pen.text("Si le texte est pâle, augmentez l'intensité. S'il est coupé, changez la largeur.", monoFont, 14f)
+        pen.text("Si le texte est pâle, augmentez l'intensité. S'il est coupé, changez la largeur.", monoFont, 15f)
         pen.space(90f)
     }
 

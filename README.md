@@ -166,8 +166,9 @@ mémorisé. L'imprimante choisie est reconnectée automatiquement à chaque lanc
 ## 5. Le ticket de test
 
 *Réglages > Imprimer un ticket de test* imprime une mire :
-- une **règle graduée** avec un trait vertical à chaque bord : les deux traits doivent toucher les
-  bords du papier ;
+- une **règle graduée** avec un trait vertical à chaque bord de la zone imprimable : les deux traits
+  doivent être visibles en entier. Une marge blanche de part et d'autre est normale (sur un rouleau
+  de 58 mm, la tête n'imprime que sur environ 48 mm) ;
 - des **bandes noires** de 4, 8, 16 et 32 points : elles doivent être bien noires et régulières ;
 - du **texte en plusieurs tailles** et un damier.
 
@@ -197,8 +198,8 @@ Faites ce test avant le premier vrai PV, et après chaque changement d'imprimant
 ### Caractères illisibles, image en escalier ou coupée
 
 - **Largeur de papier** : une imprimante 58 mm réglée en 80 mm produit une image décalée, en
-  escalier ou coupée à droite. Choisissez *Réglages > Papier > 58 mm*. Les traits verticaux de la
-  mire doivent toucher les deux bords.
+  escalier ou coupée à droite. Choisissez *Réglages > Papier > 58 mm*. Les deux traits verticaux de
+  la mire doivent être visibles en entier.
 - Des symboles au hasard indiquent un **mauvais protocole** : forcez-en un autre.
 - Ticket coupé net au milieu : l'imprimante a manqué de mémoire ou de batterie. Rechargez-la et
   réessayez.
