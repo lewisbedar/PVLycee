@@ -250,6 +250,22 @@ Après un changement, l'application se reconnecte : refaites un ticket de test.
 
 ---
 
+## Annexe : application « Raccourcis » pour le Sunmi V2
+
+Sur le Sunmi V2, le lanceur cache les icônes de l'appareil photo, de la calculatrice et de la galerie
+du système, alors que ces applications sont bien présentes. Le module `raccourcis` est une
+mini-application, sans permission ni dépendance, qui ajoute trois icônes : **Appareil photo**,
+**Calculatrice** et **Galerie**. Chacune ouvre l'application du système correspondante.
+
+- Compilation : `./gradlew :raccourcis:assembleDebug`
+  (APK : `raccourcis/build/outputs/apk/debug/raccourcis-debug.apk`).
+- Sur GitHub : artefact **Raccourcis-debug-apk** de l'onglet Actions.
+- Installation : comme PVLycée, par exemple `adb install -r raccourcis-debug.apk`.
+
+Si une application cible n'existe pas sur l'appareil, l'icône affiche « introuvable sur cet
+appareil ». L'appareil photo du système enregistre les photos sur le terminal, contrairement à
+l'onglet Photo de PVLycée.
+
 ## 7. Confidentialité
 
 - Aucune permission `INTERNET` (elle est explicitement retirée du manifeste).

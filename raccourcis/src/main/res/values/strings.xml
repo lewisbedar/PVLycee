@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Raccourcis</string>
+    <string name="camera">Appareil photo</string>
+    <string name="calculator">Calculatrice</string>
+    <string name="gallery">Galerie</string>
+    <string name="not_found">%1$s introuvable sur cet appareil.</string>
+</resources>

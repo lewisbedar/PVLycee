@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PVLycee"
 include(":app")
+include(":raccourcis")
